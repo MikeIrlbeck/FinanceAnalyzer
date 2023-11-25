@@ -102,7 +102,7 @@ class YearOfPurchase:
 
 yearPurchases = []
 
-for j in range(2022, 2023 + 1):
+for j in range(2022, date.today().year + 1):
     yearPurchases.append(YearOfPurchase(j))
 
 
