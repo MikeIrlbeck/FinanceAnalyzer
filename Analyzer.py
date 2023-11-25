@@ -80,7 +80,7 @@ class YearOfPurchase:
     def __str__(self) -> str:
         output = "\n%d Financial Report\n" % self.year
 
-        formatNumber = "{:.2f}"
+        formatNumber = "{:,.2f}"
         data = []
         for mp in self.monthPurchases:
             if (mp.getTotalExpenses() > 0.0):
