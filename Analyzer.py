@@ -13,46 +13,6 @@ class Purchase():
         return "{} : {} : {}".format(self.date, self.item, self.amount)
 
 
-def filter(line):
-    return (re.search(r"^\s$", line)) is None  # true if no whitepsace
-
-
-def parsePurchaseLine(line):
-    dataList = re.search(
-        r"(^[0-9|/\*]+),{1}\s*([^,]*)\s*,\s*\$?(\d*(\.\d+)?)", line)
-
-    if dataList is None:
-        raise Exception("Bad read of: {}".format(line))
-
-    dateList = dataList.group(1).split("/")
-    year = dateList[-1] if len(dateList[-1]) > 2 else "20" + str(dateList[-1])
-    day = int(dateList[1]) if bool(
-        re.search(r"[0-9]+", dateList[1])) else int(1)
-    thisDate = date(int(year), int(dateList[0]), day)
-
-    return Purchase(thisDate, dataList.group(2), dataList.group(3))
-
-
-purchases = []
-
-with open("/Users/michaelirlbeck/Documents/FinanceAnalyzer/ExpenseData.txt", "r") as data:
-
-    for x in data:
-        if filter(x):
-            try:
-                purchases.append(parsePurchaseLine(x))
-            except ValueError:
-                raise Exception("Error: " + str(x))
-
-
-purchases.sort(key=lambda el: el.date)  # sort by date
-
-total = 0.0
-for purchase in purchases:
-    total = total + float(purchase.amount)
-print("total amount: ${:.2f}".format(total))
-
-
 class YearOfPurchase:
     class MonthOfPurchase:
         def __init__(self, month):
@@ -105,7 +65,45 @@ yearPurchases = []
 
 for j in range(2022, 2023 + 1):
     yearPurchases.append(YearOfPurchase(j))
-print(len(yearPurchases))
+
+
+def read_finance_data(file_str: str) -> list:
+    def parsePurchaseLine(line):
+        dataList = re.search(
+            r"(^[0-9|/\*]+),{1}\s*([^,]*)\s*,\s*\$?(\d*(\.\d+)?)", line)
+
+        if dataList is None:
+            raise Exception("Bad read of: {}".format(line))
+
+        dateList = dataList.group(1).split("/")
+        year = dateList[-1] if len(dateList[-1]
+                                   ) > 2 else "20" + str(dateList[-1])
+        day = int(dateList[1]) if bool(
+            re.search(r"[0-9]+", dateList[1])) else int(1)
+        thisDate = date(int(year), int(dateList[0]), day)
+
+        return Purchase(thisDate, dataList.group(2), dataList.group(3))
+
+    def filter(line):
+        return (re.search(r"^\s$", line)) is None  # true if no whitepsace
+
+    items = []
+    with open(file_str, "r") as data:
+        for x in data:
+            if filter(x):
+                try:
+                    items.append(parsePurchaseLine(x))
+                except ValueError:
+                    raise Exception("Error: " + str(x))
+
+    items.sort(key=lambda el: el.date)  # sort by date
+    return items
+
+
+purchases = read_finance_data(
+    "/Users/michaelirlbeck/Documents/FinanceAnalyzer/ExpenseData.txt")
+
+
 for purchase in purchases:
     index = int(purchase.date.year) - 2022
     yearPurchases[index].add(purchase)
