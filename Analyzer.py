@@ -1,6 +1,6 @@
-
 import re
 from datetime import date
+from tabulate import tabulate
 
 
 class Purchase():
@@ -88,14 +88,16 @@ class YearOfPurchase:
         return total
 
     def __str__(self) -> str:
-        output = "Purchases of year %d\n" % self.year
-        output += "Total $%.2f\n" % self.getTotal()
+        output = "\n%d Financial Report\n" % self.year
 
+        data = []
         for mp in self.monthPurchases:
             if (mp.getTotal() > 0.0):
-                output += "{:d} : {:.2f}\n".format(
-                    mp.getMonth(), mp.getTotal())
+                data.append(
+                    [str(mp.getMonth()), "{:.2f}".format(mp.getTotal())])
 
+        data.append(["Total", "%.2f" % self.getTotal()])
+        output += tabulate(data, headers=['Month', 'Expense ($)'])
         return output
 
 
