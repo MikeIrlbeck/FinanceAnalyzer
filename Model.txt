@@ -1,5 +1,0 @@
-{"name": "Car"}
-{"name": "Groceries"}
-{"name": "Eating Out"}
-{"name": "Personal"}
-{"name": "Miscellaneous"}
