@@ -87,16 +87,16 @@ class YearOfPurchase:
                 profit = mp.getTotalProfit()
                 data.append(
                     [str(mp.getMonth()),
-                     formatNumber.format(mp.getTotalExpenses()),
                      formatNumber.format(mp.getTotalRevenue()),
+                     formatNumber.format(mp.getTotalExpenses()),
                      formatNumber.format(profit) if profit > 0 else ("(%s)" % formatNumber).format(abs(profit))])
 
         data.append(["Total",
-                     formatNumber.format(self.getTotalExpenses()),
                      formatNumber.format(self.getTotalRevenue()),
+                     formatNumber.format(self.getTotalExpenses()),
                      formatNumber.format(self.getTotalProfit())])
         output += tabulate(data,
-                           headers=['Month', 'Expense ($)', 'Income ($)', 'Profit ($)'])
+                           headers=['Month', 'Income ($)', 'Expense ($)', 'Profit ($)'])
         return output
 
 
