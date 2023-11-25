@@ -1,4 +1,5 @@
 import re
+import os
 from datetime import date
 from tabulate import tabulate
 
@@ -138,11 +139,10 @@ def read_finance_data(file_str: str) -> list:
     return items
 
 
-purchases = read_finance_data(
-    "/Users/michaelirlbeck/Documents/FinanceAnalyzer/ExpenseData.txt")
+cwd = os.getcwd()
+purchases = read_finance_data(cwd + "/ExpenseData.txt")
 
-revenue = read_finance_data(
-    "/Users/michaelirlbeck/Documents/FinanceAnalyzer/IncomeData.txt")
+revenue = read_finance_data(cwd + "/IncomeData.txt")
 
 
 groups = []
