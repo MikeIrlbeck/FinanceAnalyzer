@@ -1,0 +1,25 @@
+
+Scope of this financial analyzer:
+
+Add tracking income next.
+
+- easy to input data
+    - Expenses
+    - Income
+    - Savings
+    - Investing
+    - Emergency fund
+    // the input data categories are variable; can be categorized by the user
+- ways to input data
+    - by hand (easy to start)
+    - by reading bank statements
+    - by reading text messages or emails (you purchased this at Amazon for $.99)
+    - credit card statements
+- ability to modify and correct data 
+    - ability to search for data
+- ability to display the data in different ways. Example categories:
+    - by different timelines (i.e. week, month, year)
+    - by overall categories
+    - by subcategories
+    // some filters should work together
+- analyze spending patterns
