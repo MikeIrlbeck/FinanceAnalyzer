@@ -151,7 +151,11 @@ groups.append({'items': revenue, 'callback': lambda x, y: x.addRevenue(y)})
 for items in groups:
     for item in items['items']:
         index = int(item.date.year) - 2022
-        items['callback'](yearPurchases[index], item)
+        try:
+            items['callback'](yearPurchases[index], item)
+        except Exception:
+            print('Invalid', item)
+            pass
 
 for yp in yearPurchases:
     print(yp)
