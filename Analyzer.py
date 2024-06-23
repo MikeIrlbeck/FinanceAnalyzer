@@ -109,7 +109,7 @@ for j in range(2022, date.today().year + 1):
 def read_finance_data(file_str: str) -> list:
     def parsePurchaseLine(line):
         dataList = re.search(
-            r"(^[0-9|/\*]+),{1}\s*([^,]*)\s*,\s*\$?(\d*(\.\d+)?)", line)
+            r"(^[0-9|/\*]+),{1}\s*([^,]*)\s*,\s*\$?(-?\d*(\.\d+)?)", line)
 
         if dataList is None:
             raise Exception("Bad read of: {}".format(line))
